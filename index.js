@@ -6,6 +6,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 import sessionMiddleware from "./auth/sessionMiddleware.js";
 import cors from "cors";
+import authRouter from "./routes/authRouter.js";
 
 app.use(cors());
 
@@ -30,6 +31,7 @@ app.use(sessionMiddleware);
 app.use(passport.session());
 
 app.use("/api", apiRouter);
+app.use("/auth", authRouter);
 
 app.use((req, res) => {
   res.status(404).json("No resource found");
