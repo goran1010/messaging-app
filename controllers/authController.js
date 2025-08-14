@@ -1,6 +1,7 @@
 import prisma from "../db/prisma.js";
 import passport from "../auth/passport.js";
 import bcrypt from "bcryptjs";
+import isLoggedIn from "../auth/isLoggedIn.js";
 
 export const logIn = [
   passport.authenticate("local"),
@@ -18,3 +19,14 @@ export async function signUp(req, res) {
     res.status(400).json(err);
   }
 }
+
+export const me = [
+  isLoggedIn,
+  function (req, res) {
+    try {
+      res.json(req.user);
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  },
+];
