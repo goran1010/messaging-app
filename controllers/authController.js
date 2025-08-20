@@ -20,6 +20,15 @@ export async function signUp(req, res) {
   }
 }
 
+export async function updateProfile(req, res) {
+  const { userId, firstName, lastName } = req.body;
+  const userInfo = prisma.userInfo.update({
+    where: { userId },
+    data: { firstName, lastName },
+  });
+  res.json(userInfo);
+}
+
 export const me = [
   isLoggedIn,
   function (req, res) {
