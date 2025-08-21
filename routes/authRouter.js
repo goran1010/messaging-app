@@ -3,7 +3,7 @@ const authRouter = Router();
 import * as authController from "../controllers/authController.js";
 import multer from "multer";
 
-const upload = multer({ dest: "uploads/" });
+const upload = multer({ storage: multer.memoryStorage() });
 
 authRouter.post("/log-in", authController.logIn);
 authRouter.post("/sign-up", authController.signUp);
