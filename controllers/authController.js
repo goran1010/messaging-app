@@ -23,7 +23,8 @@ export async function signUp(req, res) {
 
 export async function updateProfile(req, res) {
   try {
-    const { userId, firstName, lastName } = req.body;
+    const { firstName, lastName } = req.body;
+    const userId = req.user.id;
     const imageBuffer = req.file?.buffer;
     const imageName = req.file?.originalname;
 
@@ -127,6 +128,15 @@ export async function updateProfile(req, res) {
   }
 }
 
+export async function profileImage(req, res) {
+  const { userId } = req.query;
+  const userInfo = await prisma.userInfo.findFirst({
+    where: { userId },
+    include: { image: { select: { url: true } } },
+  });
+  res.json(userInfo.image.url);
+}
+
 export const me = [
   isLoggedIn,
   function (req, res) {
@@ -137,3 +147,11 @@ export const me = [
     }
   },
 ];
+export function logOut(req, res, next) {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.json("Logged out");
+  });
+}

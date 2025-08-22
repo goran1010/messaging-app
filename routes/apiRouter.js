@@ -1,7 +1,9 @@
 import { Router } from "express";
 const apiRouter = Router();
-import apiController from "../controllers/apiController.js";
+import * as apiController from "../controllers/apiController.js";
+import isLoggedIn from "../auth/isLoggedIn.js";
 
-apiRouter.get("/", apiController);
+apiRouter.get("/", apiController.check);
+apiRouter.put("/add-friend", isLoggedIn, apiController.addFriend);
 
 export default apiRouter;

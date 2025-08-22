@@ -2,6 +2,7 @@ import { Router } from "express";
 const authRouter = Router();
 import * as authController from "../controllers/authController.js";
 import multer from "multer";
+import isLoggedIn from "../auth/isLoggedIn.js";
 
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -13,5 +14,7 @@ authRouter.put(
   authController.updateProfile,
 );
 authRouter.get("/me", authController.me);
+authRouter.get("/profile-image", authController.profileImage);
+authRouter.get("/log-out", isLoggedIn, authController.logOut);
 
 export default authRouter;
