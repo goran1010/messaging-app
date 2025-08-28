@@ -118,11 +118,14 @@ export async function updateProfile(req, res) {
 
       userInfo = await prisma.userInfo.create({
         data: newUserInfoData,
-        include: { image: true },
+        include: { image: true, User: true },
       });
     }
-
-    return res.json(userInfo);
+    const updatedUser = await prisma.user.findFirst({
+      where: { id: userInfo.userId },
+      include: { userInfo: true },
+    });
+    return res.json(updatedUser);
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
@@ -139,9 +142,13 @@ export async function profileImage(req, res) {
 
 export const me = [
   isLoggedIn,
-  function (req, res) {
+  async function (req, res) {
     try {
-      res.json(req.user);
+      const user = await prisma.user.findFirst({
+        where: { id: req.user.id },
+        include: { userInfo: true },
+      });
+      res.json(user);
     } catch (err) {
       res.status(400).json(err);
     }
