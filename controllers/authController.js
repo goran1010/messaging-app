@@ -137,7 +137,7 @@ export async function profileImage(req, res) {
     where: { userId },
     include: { image: { select: { url: true } } },
   });
-  res.json(userInfo.image.url);
+  res.json(userInfo.image?.url || null);
 }
 
 export const me = [

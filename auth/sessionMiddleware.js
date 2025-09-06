@@ -1,5 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config();
 const NUMBER_OF_DAYS = 30;
 const COOKIE_SECRET = process.env.COOKIE_SECRET;
 

@@ -1,7 +1,6 @@
 import express from "express";
 import passport from "./auth/passport.js";
-import dotenv from "dotenv";
-dotenv.config();
+import "dotenv/config";
 const app = express();
 const PORT = process.env.PORT || 3000;
 import sessionMiddleware from "./auth/sessionMiddleware.js";
@@ -19,15 +18,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 import path from "node:path";
-import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
-
-const assetsPath = path.join(__dirname, "public");
+const assetsPath = path.join(import.meta.dirname, "public");
 app.use(express.static(assetsPath));
 
 import apiRouter from "./routes/apiRouter.js";
