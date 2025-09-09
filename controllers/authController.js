@@ -146,8 +146,12 @@ export const me = [
     try {
       const user = await prisma.user.findFirst({
         where: { id: req.user.id },
-        include: { userInfo: true },
+        include: {
+          userInfo: true,
+          chats: { include: { users: true, messages: true } },
+        },
       });
+
       res.json(user);
     } catch (err) {
       res.status(400).json(err);

@@ -27,6 +27,11 @@ import apiRouter from "./routes/apiRouter.js";
 app.use(sessionMiddleware);
 app.use(passport.session());
 
+import addChatRoute from "./controllers/addChat.js";
+import addMessage from "./controllers/addMessage.js";
+
+app.use("/api/add-chat", addChatRoute);
+app.use("/api/messages", addMessage);
 app.use("/api", apiRouter);
 app.use("/auth", authRouter);
 
