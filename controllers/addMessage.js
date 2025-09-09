@@ -29,8 +29,14 @@ router.post("/", isLoggedIn, async (req, res) => {
         userId,
       },
     });
-
-    res.json(message);
+    const user = await prisma.user.findFirst({
+      where: { id: req.user.id },
+      include: {
+        userInfo: true,
+        chats: { include: { users: true, messages: true } },
+      },
+    });
+    res.json({ user, message });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server error" });

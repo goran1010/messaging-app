@@ -151,7 +151,6 @@ export const me = [
           chats: { include: { users: true, messages: true } },
         },
       });
-
       res.json(user);
     } catch (err) {
       res.status(400).json(err);
