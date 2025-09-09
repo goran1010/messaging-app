@@ -9,7 +9,10 @@ import authRouter from "./routes/authRouter.js";
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://elderly-quintina-goran-jovic-1010-bd74cbdf.koyeb.app/",
+    ],
     credentials: true,
   }),
 );
