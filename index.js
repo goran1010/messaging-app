@@ -11,7 +11,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://elderly-quintina-goran-jovic-1010-bd74cbdf.koyeb.app",
+      "https://messaging-app-goran.netlify.app",
     ],
     credentials: true,
   }),
