@@ -1,6 +1,6 @@
 # Messaging App
 
-A bare-bones messaging app project built with Express and Prisma, with session based auth with Passport.
+Back-end repo for a bare-bones messaging app project built with Express and Prisma, with session based auth with Passport.
 
 ## Prerequisites
 
